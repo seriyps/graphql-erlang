@@ -56,7 +56,8 @@ end_per_testcase(_Case, _Config) ->
 groups() ->
     Dungeon =
         {dungeon, [],
-         [ unions,
+         [ dump_dot,
+           unions,
            defer,
            union_errors,
            error_handling,
@@ -135,6 +136,9 @@ subscription_receive(N) ->
     after 5000 ->
             error(timeout)
     end.
+
+dump_dot(_Config) ->
+    ok = graphql_dot:dump("./dungeon_schema.dot").
 
 default_query(Config) ->
     ID = ?config(known_goblin_id_1, Config),
